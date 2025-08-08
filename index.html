@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=5" />
+  <title>Attendance Management System | AttendEase</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    /* Professional Color Scheme */
+    :root {
+      --primary: #2a5298;
+      --primary-light: #3b6bc5;
+      --primary-dark: #1e3c72;
+      --accent: #2a5298;
+      --light: #ffffff;
+      --dark: #1a202c;
+      --gray-100: #f8fafc;
+      --gray-200: #f1f5f9;
+      --gray-300: #e2e8f0;
+      --gray-400: #cbd5e1;
+      --gray-500: #94a3b8;
+      --gray-600: #64748b;
+      --gray-700: #475569;
+      --gray-800: #1e293b;
+      --gray-900: #0f172a;
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    
+    body {
+      background: var(--light);
+      color: var(--gray-900);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    /* Header Section - Professional Style */
+    .header {
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+      color: var(--light);
+      padding: 2.5rem 1rem;
+      text-align: center;
+      position: relative;
+    }
+    
+    .header-content {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+    }
+    
+    .logo-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1.75rem;
+    }
+    
+    .logo {
+      width: 90px;
+      height: 90px;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.15));
+      background-color: var(--light);
+      border-radius: 18px;
+      padding: 0.75rem;
+      transition: transform 0.3s ease;
+    }
+    
+    .logo:hover {
+      transform: scale(1.05);
+    }
+    
+    h1 {
+      font-weight: 700;
+      font-size: 2.5rem;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+      color: var(--light);
+      letter-spacing: -0.025em;
+    }
+    
+    .welcome-message {
+      font-weight: 500;
+      font-size: 1.25rem;
+      color: rgba(255, 255, 255, 0.95);
+      margin-bottom: 1.25rem;
+    }
+    
+    .system-description {
+      font-weight: 400;
+      font-size: 1.05rem;
+      color: rgba(255, 255, 255, 0.9);
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+      position: relative;
+    }
+    
+    /* Login Options - Professional Cards */
+    .login-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2.5rem;
+      margin: 0 auto 4rem;
+    }
+    
+    .login-card {
+      background: var(--light);
+      border-radius: 16px;
+      box-shadow: var(--card-shadow);
+      overflow: hidden;
+      transition: var(--transition);
+      text-decoration: none;
+      color: var(--gray-800);
+      border: none;
+      position: relative;
+    }
+    
+    .login-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+    
+    .card-header {
+      padding: 1.75rem;
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+      color: var(--light);
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+    
+    .card-header i {
+      font-size: 1.75rem;
+      color: var(--light);
+    }
+    
+    .card-body {
+      padding: 1.75rem;
+    }
+    
+    .card-title {
+      font-size: 1.35rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--light);
+    }
+    
+    .card-text {
+      color: var(--gray-600);
+      margin-bottom: 1.75rem;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    
+    /* Professional Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.875rem 1.75rem;
+      border-radius: 10px;
+      font-weight: 600;
+      text-align: center;
+      text-decoration: none;
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      gap: 0.75rem;
+      width: 100%;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    }
+    
+    .btn-primary {
+      background-color: var(--primary);
+      color: var(--light);
+    }
+    
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    
+    /* Features Section */
+    .features {
+      margin: 5rem auto;
+      max-width: 1200px;
+    }
+    
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 3rem;
+      color: var(--dark);
+      position: relative;
+      padding-bottom: 1rem;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 100%);
+      border-radius: 2px;
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2.5rem;
+    }
+    
+    .feature-card {
+      background: var(--light);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      box-shadow: var(--card-shadow);
+      text-align: center;
+      transition: var(--transition);
+      border-top: 5px solid var(--primary);
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+    
+    .feature-icon {
+      font-size: 2.75rem;
+      color: var(--primary);
+      margin-bottom: 1.75rem;
+      background: rgba(42, 82, 152, 0.08);
+      width: 80px;
+      height: 80px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: var(--transition);
+    }
+    
+    .feature-card:hover .feature-icon {
+      transform: scale(1.1);
+    }
+    
+    .feature-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--dark);
+    }
+    
+    .feature-text {
+      color: var(--gray-600);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+    
+    /* Professional Footer */
+    footer {
+      background-color: var(--dark);
+      color: var(--gray-300);
+      padding: 4rem 1rem 2.5rem;
+      text-align: center;
+      margin-top: auto;
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 3rem;
+      text-align: left;
+      margin-bottom: 3rem;
+    }
+    
+    .footer-column h3 {
+      color: var(--light);
+      font-size: 1.25rem;
+      margin-bottom: 1.75rem;
+      font-weight: 600;
+      position: relative;
+      padding-bottom: 0.875rem;
+    }
+    
+    .footer-column h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: var(--primary);
+    }
+    
+    .footer-column ul {
+      list-style: none;
+    }
+    
+    .footer-column li {
+      margin-bottom: 1rem;
+    }
+    
+    .footer-column a {
+      color: var(--gray-400);
+      text-decoration: none;
+      transition: color 0.3s ease;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    
+    .footer-column a:hover {
+      color: var(--primary-light);
+      text-decoration: underline;
+    }
+    
+    .footer-column a i {
+      font-size: 0.9rem;
+    }
+    
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 2rem;
+      font-size: 0.9rem;
+    }
+    
+    .footer-bottom p {
+      margin-bottom: 0.75rem;
+    }
+    
+    .university-name {
+      font-weight: 600;
+      color: var(--primary-light);
+    }
+    
+    /* Enhanced Mobile Responsiveness */
+    @media (max-width: 1024px) {
+      .login-options, .features-grid {
+        gap: 2rem;
+      }
+      
+      .feature-card {
+        padding: 2rem 1.5rem;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.2rem;
+      }
+      
+      .welcome-message {
+        font-size: 1.15rem;
+      }
+      
+      .system-description {
+        font-size: 1rem;
+      }
+      
+      .login-options {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+        margin: 0 auto 3rem;
+      }
+      
+      .section-title {
+        font-size: 1.75rem;
+        margin-bottom: 2.5rem;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2.5rem;
+      }
+      
+      .footer-column h3::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      
+      .footer-column ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+      }
+      
+      .footer-column li {
+        margin-bottom: 0;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .header {
+        padding: 1.75rem 1rem;
+      }
+      
+      h1 {
+        font-size: 1.9rem;
+      }
+      
+      .logo {
+        width: 75px;
+        height: 75px;
+        border-radius: 14px;
+      }
+      
+      .card-header, .card-body {
+        padding: 1.5rem;
+      }
+      
+      .card-title {
+        font-size: 1.25rem;
+      }
+      
+      .btn {
+        padding: 0.75rem 1.5rem;
+      }
+      
+      .feature-card {
+        padding: 1.75rem 1.25rem;
+      }
+      
+      .feature-title {
+        font-size: 1.15rem;
+      }
+      
+      .footer-content {
+        gap: 2rem;
+      }
+      
+      .footer-column ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75rem;
+      }
+    }
+    
+    @media (max-width: 360px) {
+      h1 {
+        font-size: 1.7rem;
+      }
+      
+      .welcome-message {
+        font-size: 1.05rem;
+      }
+      
+      .card-header {
+        padding: 1.25rem;
+      }
+      
+      .card-header i {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-content">
+      <div class="logo-container">
+        <img src="assets/images/logo.png" alt="AttendEase Logo" class="logo" />
+      </div>
+      <h1>AttendEase</h1>
+      <p class="welcome-message">Digital Presence. Real Impact.</p>
+      <p class="system-description">
+        Our integrated platform provides secure access to attendance records, academic performance data, 
+        and institutional services for faculty, students, and administrators.
+      </p>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <nav class="login-options" aria-label="Login Options">
+      <a href="login-student.php" class="login-card" aria-label="Student Portal">
+        <div class="card-header">
+          <i class="fas fa-user-graduate"></i>
+          <h2 class="card-title">Student Portal</h2>
+        </div>
+        <div class="card-body">
+          <p class="card-text">Access your courses, attendance records, academic calendar, and performance reports in one convenient location.</p>
+          <button class="btn btn-primary">
+            <i class="fas fa-sign-in-alt"></i> Login as Student
+          </button>
+        </div>
+      </a>
+      
+      <a href="login-teacher.php" class="login-card" aria-label="Faculty Portal">
+        <div class="card-header">
+          <i class="fas fa-chalkboard-teacher"></i>
+          <h2 class="card-title">Faculty Portal</h2>
+        </div>
+        <div class="card-body">
+          <p class="card-text">Manage courses, track attendance, submit grades, and access teaching resources and analytics.</p>
+          <button class="btn btn-primary">
+            <i class="fas fa-sign-in-alt"></i> Login as Faculty
+          </button>
+        </div>
+      </a>
+      
+      <a href="login-admin.php" class="login-card" aria-label="Administration">
+        <div class="card-header">
+          <i class="fas fa-user-shield"></i>
+          <h2 class="card-title">Administration</h2>
+        </div>
+        <div class="card-body">
+          <p class="card-text">Institutional management tools for attendance tracking, academic oversight, and system administration.</p>
+          <button class="btn btn-primary">
+            <i class="fas fa-sign-in-alt"></i> Administrator Login
+          </button>
+        </div>
+      </a>
+    </nav>
+
+    <section class="features">
+      <h2 class="section-title">System Features</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-calendar-check"></i>
+          </div>
+          <h3 class="feature-title">Attendance Tracking</h3>
+          <p class="feature-text">Real-time tracking and reporting of student attendance with detailed analytics.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-chart-pie"></i>
+          </div>
+          <h3 class="feature-title">Performance Analytics</h3>
+          <p class="feature-text">Comprehensive analytics linking attendance patterns with academic performance metrics.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-mobile-alt"></i>
+          </div>
+          <h3 class="feature-title">Mobile Access</h3>
+          <p class="feature-text">Fully responsive design with mobile-friendly interfaces for on-the-go access.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-column">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> University Homepage</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Academic Calendar</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Registrar's Office</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Library Resources</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Support</h3>
+        <ul>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Help Center</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> IT Services</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> System Requirements</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Contact Support</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Connect With Us</h3>
+        <ul>
+          <li><a href="#"><i class="fab fa-facebook-f"></i> Facebook</a></li>
+          <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+          <li><a href="#"><i class="fab fa-linkedin-in"></i> LinkedIn</a></li>
+          <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p><span class="university-name">AttendEase</span> - Digital Presence. Real Impact.</p>
+      <p>© <span id="current-year">2023</span> AttendEase. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Automatically update copyright year
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
